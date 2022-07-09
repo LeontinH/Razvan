@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<body style = "text-align:center;">
+
+</head>
+<body>
+<h1></h1>
+<input type="text" id="text1"></input>
+<input type="text" id="text2"></input>
+<input type="button" id="button3" value="Search for the word in the dictionary" onclick="search_word();"></input>
+<input type="button" id="button1" value="Add word to dictionary" onclick="add_element_to_array();"></input>
+<input type="button" id="button2" value="Display" onclick="display_array();"></input>
+<div id="Result"></div> 
+
+<p id = "My_Style" style = "color:blueviolet; font-size: 20px; font-weight: bold;"></p>     
+
+<script type="text/javascript">
+    let x = 2;
+    document.getElementById("My_Style").innerHTML = "Hello, please write a word in the above space and then you can check if it exists in the dictionary</br> If the word does not exist in the dictionary, you can add it!";
+    const array = new Map([
+  		["student", "Student is a person enrolled in a school"],
+  		["mentorship", "Mentorship is the influence, guidance, or direction given by a mentor"],
+	]);
+
+    function search_word() {
+      if (document.getElementById("text1").value != "") {
+        document.getElementById("My_Style").innerHTML = "This word does not exist in this dictionary.</br> You can add it if you click the -Add word to dictionary- button!";
+        let i = 0;
+        for (var [key, value] of array) {
+            if (key == document.getElementById("text1").value.toLowerCase()) {
+            	alert("array[i]= " + key);
+                document.getElementById("My_Style").innerHTML = "The searched word -" + key + " = " + value + "-, is already in the dictionary at the position: " + i + "</br>You can write a new word if you like.";
+                document.getElementById("text1").value = "";
+                document.getElementById("text2").value = "";
+                break;
+            }
+        }
+      }
+    }
+
+    function add_element_to_array() {
+      if (document.getElementById("text1").value != "") {
+          array.set((document.getElementById("text1").value.toLowerCase()), (document.getElementById("text2").value.toLowerCase()));
+          document.getElementById("My_Style").innerHTML = "The word -" + document.getElementById("text1").value.toLowerCase() + "-, was successfully added to the dictionary at the position: " + x + "</br>You can write a new word if you like.";
+          ++x;
+          document.getElementById("text1").value = "";
+          document.getElementById("text2").value = "";
+        }
+    }
+
+    function display_array() {
+       	for (var [key, value] of array) {
+  			document.write(key + ' = ' + value + "</br>");
+		} 
+       	document.getElementById("Result").innerHTML = array.get("ada");
+    }
+
+</script>
+</body>
+</html>
